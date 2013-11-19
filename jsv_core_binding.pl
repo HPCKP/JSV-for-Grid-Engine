@@ -27,8 +27,6 @@ jsv_on_start(sub {
 
 jsv_on_verify(sub {
    my %params = jsv_get_param_hash();
-   my $do_correct = 0;
-   my $do_wait = 0;
    
    # print all params for debugging
    # this only works when running jsv at client side
@@ -38,15 +36,14 @@ jsv_on_verify(sub {
    # this functions can be used to add info to the master logfile
    # it only works when running jsv at server side
    # jsv server side: qconf -mconf >> jsv_url
-   # jsv_log_warning('running jsv_log_warning()');
-   # jsv_log_error('running jsv_log_error()');
+   # jsv_log_warning('this is a test message to master log');
+   # jsv_log_error('this is a test error message to log');
 
    # You must ask for a queue
    #	if (!(exists $params{q_hard})) {
    #		# this message is only printed when running jvs in client side
    #		jsv_log_info ('No queue specified, your job will be submitted to short queue');
    #		jsv_sub_add_param('q_hard','short');
-   #		$do_correct = 1;
    #	}
 
    #	 You must ask for  time limit
@@ -54,7 +51,6 @@ jsv_on_verify(sub {
    #		jsv_sub_add_param('l_hard','h_rt','6:00:00');
    #		# this message is only printed when running jvs in client side
    #		jsv_log_info ('No time requested, default is 6h');
-   #		$do_correct = 1;
    #	}
 
 
