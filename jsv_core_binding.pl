@@ -1,4 +1,10 @@
 #!/usr/bin/perl
+# this perl port was done by Arnau Bria
+# slightly modified by Pablo Escobar
+
+# this perl version has better performance that the bash version.
+# To get the best performance be sure to run the jsv in the server side (qconf -mconf >> jsv_url)
+# https://blogs.oracle.com/templedf/entry/performance_considerations_for_jsv_scripts
 
 use strict;
 use warnings;
@@ -37,7 +43,7 @@ jsv_on_verify(sub {
 
    # You must ask for a queue
    #	if (!(exists $params{q_hard})) {
-   #		# this message is only showed when running jvs in client side
+   #		# this message is only printed when running jvs in client side
    #		jsv_log_info ('No queue specified, your job will be submitted to short queue');
    #		jsv_sub_add_param('q_hard','short');
    #		$do_correct = 1;
@@ -46,7 +52,7 @@ jsv_on_verify(sub {
    #	 You must ask for  time limit
    #	if (!(exists $params{l_hard}{h_rt})) {
    #		jsv_sub_add_param('l_hard','h_rt','6:00:00');
-   #		# this message is only showed when running jvs in client side
+   #		# this message is only printed when running jvs in client side
    #		jsv_log_info ('No time requested, default is 6h');
    #		$do_correct = 1;
    #	}
@@ -72,13 +78,13 @@ jsv_on_verify(sub {
 			jsv_sub_add_param('binding_type','set');
 			jsv_sub_add_param('binding_strategy','linear_automatic');
 			jsv_sub_add_param('binding_amount','1');
+   			# this message is only printed when running jvs in client side
 			jsv_log_info ('Core binding added');
-			#jsv_reject_wait ('Core binding added');
 		}elsif ($params{pe_name} eq 'smp'){
 			# This is a SMP job. First, add Reservation:
 			jsv_sub_add_param('R','y');
+   			# this message is only printed when running jvs in client side
 			jsv_log_info ('Parallel Job needs a reservation');
-			#jsv_reject_wait ('Parallel Job needs a reservation');
 	                # --------------------------------------------
         	        # "smp" was requested but no core binding
         	        # -> set linear allocation with pe max slots
@@ -90,6 +96,7 @@ jsv_on_verify(sub {
 			jsv_sub_add_param('binding_strategy','linear_automatic');
 		}elsif ($params{pe_name} eq 'ompi'){
 			jsv_sub_add_param('R','y');
+   			# this message is only printed when running jvs in client side
 			jsv_log_info ('Parallel Job needs a reservation');
 	                # --------------------------------------------
         	        # "ompi" was requested but no core binding
