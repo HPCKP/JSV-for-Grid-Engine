@@ -1,6 +1,8 @@
 #!/usr/bin/perl
 
-# This perl port was originally written by Arnau Bria and slightly modified by Pablo Escobar. Here is the original by Arnau: http://gridengine.org/pipermail/users/2013-April/005866.html The only important change is changing from binding_strategy:linear to binding_strategy:linear_automatic
+# This perl port was originally written by Arnau Bria and slightly modified by Pablo Escobar. 
+# Here is the original by Arnau: http://gridengine.org/pipermail/users/2013-April/005866.html 
+# The only important change is changing from binding_strategy:linear to binding_strategy:linear_automatic
 
 # Perl JSV has better performance than the bash version.
 # To get the best performance be sure to run the jsv in the server side (qconf -mconf >> jsv_url)
